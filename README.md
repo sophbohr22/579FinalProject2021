@@ -1,2 +1,3 @@
-# 579FinalProject2021
- Final Project for CS579 @ UW-Madison, by Ryan Bohr and Sophie Bohr
+# All the World's a Stage VR Set Design App
+Virtual Reality (CS579) Final Project @ UW-Madison  
+Authors: Ryan Bohr and Sophie Bohr
