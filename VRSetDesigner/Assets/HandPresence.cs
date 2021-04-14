@@ -6,7 +6,10 @@ using UnityEngine.XR;
 public class HandPresence : MonoBehaviour
 {
 
+    public InputDeviceCharacteristics controllerCharacteristics;
+    public List<GameObject> controllerPrefabs;
     private InputDevice targetDevice;
+    private GameObject spawnedController;
 
     // Start is called before the first frame update
     void Start()
@@ -19,17 +22,26 @@ public class HandPresence : MonoBehaviour
         }
 
         // Changes the devices list to just include right-hand controllers
-        InputDeviceCharacteristics rightControllerCharacteristics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
-        InputDevices.GetDevicesWithCharacteristics(rightControllerCharacteristics, devices);
+        // InputDeviceCharacteristics rightControllerCharacteristics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
+        
+        InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
 
         // FIXME: remove later, for debugging
         foreach (var item in devices) {
             // make sure this only prints once, then we can just do:
+            // if(devices.Count > 0)
             // targetDevice = devices[0];
             Debug.Log(item.name + " " + item.characteristics);
             targetDevice = item;
+            GameObject prefab = controllerPrefabs.Find(controller => controller.name == targetDevice.name);
+            if(prefab) {
+                spawnedController = Instantiate(prefab, transform);
+            } else {
+                Debug.LogError("Did not find corresponding controller model");
+                // just set it to the right controller
+                spawnedController = Instantiate(controllerPrefabs[0], transform);
+            }
         }
-
     }
 
     // Update is called once per frame
