@@ -29,7 +29,6 @@ public class HandPresence : MonoBehaviour
         // FIXME: remove later, for debugging
         foreach (var item in devices) {
             // make sure this only prints once, then we can just do:
-            // if(devices.Count > 0)
             // targetDevice = devices[0];
             Debug.Log(item.name + " " + item.characteristics);
             targetDevice = item;
@@ -41,6 +40,7 @@ public class HandPresence : MonoBehaviour
                 // just set it to the right controller
                 spawnedController = Instantiate(controllerPrefabs[0], transform);
             }
+            Debug.Log("BOOOOOOP" + spawnedController.name);
         }
     }
 
